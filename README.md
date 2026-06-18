@@ -1,78 +1,174 @@
-# Workout Tracker 💪
+# 💪 Workout Tracker
 
-## Description
+A modern workout tracking app built with **React Native**, **Expo**, and **TypeScript**.
 
-Workout Tracker is a React Native application built with Expo and TypeScript. It allows users to track workouts, record workout durations, view workout history, delete workouts, and receive reminder notifications.
+Track workouts, monitor progress, receive reminders, and view useful statistics through a clean dark-themed interface.
 
-## Features
+---
 
-* Add workouts
-* Store workouts locally using AsyncStorage
-* View workout history
-* Delete workouts
-* Input validation and error handling
-* Push notifications
-* TypeScript support
-* Context API state management
-* Responsive design
+## 📱 Screenshots
 
-## Technologies Used
+### Home Screen
 
-* React Native
-* Expo
-* TypeScript
-* Context API
-* AsyncStorage
-* Expo Notifications
+![Home Screen](screenshots_home.png)
 
-## Folder Structure
+### Statistics Screen
 
-src/
+![Statistics Screen](screenshots_statistics.png)
 
-* app/
-* components/
-* context/
-* hooks/
-* types/
-* utils/
+---
 
-## Installation
+## ✨ Features
 
-1. Clone the repository
+- ✅ Add workouts
+- ✅ Delete workouts
+- ✅ Workout history
+- ✅ Persistent storage with AsyncStorage
+- ✅ Workout statistics
+- ✅ Average workout duration
+- ✅ Total minutes tracked
+- ✅ Last workout tracking
+- ✅ Workout reminders with notifications
+- ✅ Modern dark UI
+- ✅ Responsive layout
+- ✅ Built with React Native + Expo + TypeScript
+
+---
+
+## 📊 Statistics Dashboard
+
+Track:
+
+- Total workouts completed
+- Total workout minutes
+- Average session duration
+- Most recent workout
+- Progress summary
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- React Native
+- Expo
+- TypeScript
+
+### State Management
+
+- React Context API
+
+### Storage
+
+- AsyncStorage
+
+### Notifications
+
+- Expo Notifications
+
+### Navigation
+
+- Expo Router
+
+### Development Tools
+
+- VS Code
+- Git
+- GitHub
+
+---
+
+## 🚀 Installation
+
+Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/PatrickStrzelczyk/WorkoutTracker.git
 ```
 
-2. Install dependencies
+Move into the project:
+
+```bash
+cd WorkoutTracker
+```
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Start the project
+Start the Expo development server:
 
 ```bash
 npx expo start
 ```
 
-## Usage
+---
 
-1. Enter a workout name.
-2. Enter the duration in minutes.
-3. Press Add Workout.
-4. View workout history.
-5. Delete workouts when needed.
-6. Send reminder notifications.
+## 📂 Project Structure
 
-## Future Improvements
+```
+src/
+│
+├── app/
+│     ├── index.tsx
+│     └── explore.tsx
+│
+├── context/
+│     └── WorkoutContext.tsx
+│
+├── types/
+│     └── workout.ts
+│
+├── utils/
+│     ├── workoutUtils.ts
+│     └── workoutUtils.test.ts
+│
+├── components/
+├── hooks/
+└── constants/
+```
 
-* Edit workouts
-* Workout categories
-* Statistics dashboard
-* Weekly progress charts
-* Cloud synchronization
+---
 
-## Author
+## 🎯 Future Improvements
 
-Patrick Strzelczyk 
+- Edit workouts
+- Search workouts
+- Workout categories
+- Weekly charts
+- Streak tracking
+- Custom themes
+- Cloud synchronization
+- Export workout history
+
+---
+
+## 📸 Built With
+
+- React Native
+- Expo
+- TypeScript
+- Context API
+- AsyncStorage
+- Expo Notifications
+
+---
+
+## 👨‍💻 Author
+
+**Patrick Strzelczyk**
+
+GitHub:
+
+https://github.com/PatrickStrzelczyk
+
+---
+
+## ⭐ Version
+
+Current Version: **1.0**
+
+First React Native + Expo project built from scratch.
