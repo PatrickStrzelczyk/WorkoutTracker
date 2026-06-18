@@ -1,56 +1,78 @@
-# Welcome to your Expo app 👋
+# Workout Tracker 💪
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Description
 
-## Get started
+Workout Tracker is a React Native application built with Expo and TypeScript. It allows users to track workouts, record workout durations, view workout history, delete workouts, and receive reminder notifications.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+* Add workouts
+* Store workouts locally using AsyncStorage
+* View workout history
+* Delete workouts
+* Input validation and error handling
+* Push notifications
+* TypeScript support
+* Context API state management
+* Responsive design
 
-2. Start the app
+## Technologies Used
 
-   ```bash
-   npx expo start
-   ```
+* React Native
+* Expo
+* TypeScript
+* Context API
+* AsyncStorage
+* Expo Notifications
 
-In the output, you'll find options to open the app in a
+## Folder Structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+src/
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+* app/
+* components/
+* context/
+* hooks/
+* types/
+* utils/
 
-## Get a fresh project
+## Installation
 
-When you're ready, run:
+1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone <repository-url>
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Install dependencies
 
-### Other setup steps
+```bash
+npm install
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+3. Start the project
 
-## Learn more
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Usage
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. Enter a workout name.
+2. Enter the duration in minutes.
+3. Press Add Workout.
+4. View workout history.
+5. Delete workouts when needed.
+6. Send reminder notifications.
 
-## Join the community
+## Future Improvements
 
-Join our community of developers creating universal apps.
+* Edit workouts
+* Workout categories
+* Statistics dashboard
+* Weekly progress charts
+* Cloud synchronization
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Author
+
+Patrick Strzelczyk 

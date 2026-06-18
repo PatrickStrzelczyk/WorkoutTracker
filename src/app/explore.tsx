@@ -1,180 +1,230 @@
-import { Image } from 'expo-image';
-import { SymbolView } from 'expo-symbols';
-import { Platform, Pressable, ScrollView, StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useWorkouts } from '../context/WorkoutContext';
+import {
+  calculateTotalMinutes,
+  countWorkouts,
+  formatWorkoutDate,
+} from '../utils/workoutUtils';
 
-import { ExternalLink } from '@/components/external-link';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Collapsible } from '@/components/ui/collapsible';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
+export default function ExploreScreen() {
+  const { workouts } = useWorkouts();
 
-export default function TabTwoScreen() {
-  const safeAreaInsets = useSafeAreaInsets();
-  const insets = {
-    ...safeAreaInsets,
-    bottom: safeAreaInsets.bottom + BottomTabInset + Spacing.three,
-  };
-  const theme = useTheme();
+  const totalWorkouts = countWorkouts(workouts);
+  const totalMinutes = calculateTotalMinutes(workouts);
 
-  const contentPlatformStyle = Platform.select({
-    android: {
-      paddingTop: insets.top,
-      paddingLeft: insets.left,
-      paddingRight: insets.right,
-      paddingBottom: insets.bottom,
-    },
-    web: {
-      paddingTop: Spacing.six,
-      paddingBottom: Spacing.four,
-    },
-  });
+  const averageDuration =
+    workouts.length > 0
+      ? Math.round(totalMinutes / workouts.length)
+      : 0;
+
+  const lastWorkout =
+    workouts.length > 0
+      ? workouts[workouts.length - 1]
+      : null;
 
   return (
-    <ScrollView
-      style={[styles.scrollView, { backgroundColor: theme.background }]}
-      contentInset={insets}
-      contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}>
-      <ThemedView style={styles.container}>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="subtitle">Explore</ThemedText>
-          <ThemedText style={styles.centerText} themeColor="textSecondary">
-            This starter app includes example{'\n'}code to help you get started.
-          </ThemedText>
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.title}>
+          📊 Workout Statistics
+        </Text>
 
-          <ExternalLink href="https://docs.expo.dev" asChild>
-            <Pressable style={({ pressed }) => pressed && styles.pressed}>
-              <ThemedView type="backgroundElement" style={styles.linkButton}>
-                <ThemedText type="link">Expo documentation</ThemedText>
-                <SymbolView
-                  tintColor={theme.text}
-                  name={{ ios: 'arrow.up.right.square', android: 'link', web: 'link' }}
-                  size={12}
-                />
-              </ThemedView>
-            </Pressable>
-          </ExternalLink>
-        </ThemedView>
+        <Text style={styles.subtitle}>
+          Monitor your progress and consistency.
+        </Text>
 
-        <ThemedView style={styles.sectionsWrapper}>
-          <Collapsible title="File-based routing">
-            <ThemedText type="small">
-              This app has two screens: <ThemedText type="code">src/app/index.tsx</ThemedText> and{' '}
-              <ThemedText type="code">src/app/explore.tsx</ThemedText>
-            </ThemedText>
-            <ThemedText type="small">
-              The layout file in <ThemedText type="code">src/app/_layout.tsx</ThemedText> sets up
-              the tab navigator.
-            </ThemedText>
-            <ExternalLink href="https://docs.expo.dev/router/introduction">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
+        <View style={styles.grid}>
 
-          <Collapsible title="Android, iOS, and web support">
-            <ThemedView type="backgroundElement" style={styles.collapsibleContent}>
-              <ThemedText type="small">
-                You can open this project on Android, iOS, and the web. To open the web version,
-                press <ThemedText type="smallBold">w</ThemedText> in the terminal running this
-                project.
-              </ThemedText>
-              <Image
-                source={require('@/assets/images/tutorial-web.png')}
-                style={styles.imageTutorial}
-              />
-            </ThemedView>
-          </Collapsible>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>
+              📈 Workouts
+            </Text>
 
-          <Collapsible title="Images">
-            <ThemedText type="small">
-              For static images, you can use the <ThemedText type="code">@2x</ThemedText> and{' '}
-              <ThemedText type="code">@3x</ThemedText> suffixes to provide files for different
-              screen densities.
-            </ThemedText>
-            <Image source={require('@/assets/images/react-logo.png')} style={styles.imageReact} />
-            <ExternalLink href="https://reactnative.dev/docs/images">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
+            <Text style={styles.value}>
+              {totalWorkouts}
+            </Text>
+          </View>
 
-          <Collapsible title="Light and dark mode components">
-            <ThemedText type="small">
-              This template has light and dark mode support. The{' '}
-              <ThemedText type="code">useColorScheme()</ThemedText> hook lets you inspect what the
-              user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-            </ThemedText>
-            <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>
+              ⏱ Minutes
+            </Text>
 
-          <Collapsible title="Animations">
-            <ThemedText type="small">
-              This template includes an example of an animated component. The{' '}
-              <ThemedText type="code">src/components/ui/collapsible.tsx</ThemedText> component uses
-              the powerful <ThemedText type="code">react-native-reanimated</ThemedText> library to
-              animate opening this hint.
-            </ThemedText>
-          </Collapsible>
-        </ThemedView>
-        {Platform.OS === 'web' && <WebBadge />}
-      </ThemedView>
+            <Text style={styles.value}>
+              {totalMinutes}
+            </Text>
+          </View>
+
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>
+              ⚡ Average
+            </Text>
+
+            <Text style={styles.value}>
+              {averageDuration}
+            </Text>
+
+            <Text style={styles.unit}>
+              min
+            </Text>
+          </View>
+
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>
+              🗓 Last Workout
+            </Text>
+
+            <Text style={styles.smallValue}>
+              {lastWorkout
+                ? formatWorkoutDate(lastWorkout.date)
+                : 'None'}
+            </Text>
+          </View>
+
+        </View>
+
+        <View style={styles.summaryCard}>
+          <Text style={styles.summaryTitle}>
+            💪 Progress Summary
+          </Text>
+
+          <Text style={styles.summaryText}>
+            {totalWorkouts === 0
+              ? 'Start tracking workouts today and build your fitness journey.'
+              : `You've completed ${totalWorkouts} workouts for a total of ${totalMinutes} minutes, averaging ${averageDuration} minutes per session.`}
+          </Text>
+        </View>
+
+        <View style={styles.goalCard}>
+          <Text style={styles.goalTitle}>
+            🚀 Stay Consistent
+          </Text>
+
+          <Text style={styles.goalText}>
+            Small daily improvements lead to long-term results.
+          </Text>
+        </View>
+
+        <Text style={styles.footer}>
+          Built with React Native + Expo
+        </Text>
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
   container: {
-    maxWidth: MaxContentWidth,
-    flexGrow: 1,
+    flex: 1,
+    backgroundColor: '#121212',
   },
-  titleContainer: {
-    gap: Spacing.three,
-    alignItems: 'center',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.six,
-  },
-  centerText: {
-    textAlign: 'center',
-  },
-  pressed: {
-    opacity: 0.7,
-  },
-  linkButton: {
-    flexDirection: 'row',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-    justifyContent: 'center',
-    gap: Spacing.one,
-    alignItems: 'center',
-  },
-  sectionsWrapper: {
-    gap: Spacing.five,
-    paddingHorizontal: Spacing.four,
-    paddingTop: Spacing.three,
-  },
-  collapsibleContent: {
-    alignItems: 'center',
-  },
-  imageTutorial: {
+
+  content: {
     width: '100%',
-    aspectRatio: 296 / 171,
-    borderRadius: Spacing.three,
-    marginTop: Spacing.two,
-  },
-  imageReact: {
-    width: 100,
-    height: 100,
+    maxWidth: 900,
     alignSelf: 'center',
+    padding: 20,
+  },
+
+  title: {
+    color: '#00A6FF',
+    fontSize: 36,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 50,
+  },
+
+  subtitle: {
+    color: '#888',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 30,
+    fontSize: 16,
+  },
+
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+
+  card: {
+    backgroundColor: '#1f1f1f',
+    width: '48%',
+    borderRadius: 20,
+    padding: 25,
+    marginBottom: 20,
+    borderLeftWidth: 5,
+    borderLeftColor: '#00A6FF',
+  },
+
+  cardTitle: {
+    color: '#bbb',
+    fontSize: 17,
+    marginBottom: 15,
+  },
+
+  value: {
+    color: '#fff',
+    fontSize: 36,
+    fontWeight: 'bold',
+  },
+
+  unit: {
+    color: '#888',
+    marginTop: 5,
+  },
+
+  smallValue: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+
+  summaryCard: {
+    backgroundColor: '#00A6FF',
+    padding: 25,
+    borderRadius: 20,
+    marginTop: 10,
+  },
+
+  summaryTitle: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+
+  summaryText: {
+    color: 'white',
+    fontSize: 17,
+    lineHeight: 28,
+  },
+
+  goalCard: {
+    backgroundColor: '#1f1f1f',
+    borderRadius: 20,
+    padding: 25,
+    marginTop: 20,
+  },
+
+  goalTitle: {
+    color: '#00A6FF',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+
+  goalText: {
+    color: '#ccc',
+    fontSize: 16,
+    lineHeight: 26,
+  },
+
+  footer: {
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 35,
+    marginBottom: 30,
   },
 });
